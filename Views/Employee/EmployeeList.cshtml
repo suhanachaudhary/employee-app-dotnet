@@ -1,0 +1,40 @@
+@model IEnumerable<EmployeeApp.Models.Employee>
+@{
+    ViewData["Title"] = "Employee List";
+}
+<h2>Employee List</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div style="color:green">@TempData["Success"]</div>
+}
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Pincode</th>
+            <th>Address</th>
+            <th>DOB</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Photo</th>
+            <th>Agreed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.Name</td>
+                <td>@emp.Pincode</td>
+                <td>@emp.Address</td>
+                <td>@emp.DOB.ToShortDateString()</td>
+                <td>@emp.Email</td>
+                <td>@emp.Gender</td>
+                <td><img src="/uploads/@emp.Photo" width="50" /></td>
+                <td>@emp.IAgreed</td>
+            </tr>
+        }
+    </tbody>
+</table>

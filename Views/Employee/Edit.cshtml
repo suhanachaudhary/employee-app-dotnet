@@ -1,0 +1,98 @@
+@model EmployeeApp.Models.Employee
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-warning text-dark text-center">
+                    <h3>Edit Employee</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" enctype="multipart/form-data" method="post">
+                        @* Hidden field to pass Employee Id *@
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label"></label>
+                            <input asp-for="Name" class="form-control" placeholder="Enter full name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Pincode" class="form-label"></label>
+                            <input asp-for="Pincode" class="form-control" placeholder="Enter pincode" />
+                            <span asp-validation-for="Pincode" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Address" class="form-label"></label>
+                            <textarea asp-for="Address" class="form-control" rows="3"
+                                placeholder="Enter address"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="DOB" class="form-label"></label>
+                            <input asp-for="DOB" type="date" class="form-control" />
+                            <span asp-validation-for="DOB" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="e.g. 91-9876543210" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" type="email" class="form-control"
+                                placeholder="Enter email address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Current Photo</label><br />
+                            @if (!string.IsNullOrEmpty(Model.Photo))
+                            {
+                                <img src="~/uploads/@Model.Photo" alt="Employee Photo" class="img-thumbnail mb-2"
+                                    width="120" />
+                            }
+                            <input type="file" name="photoFile" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label d-block">Gender</label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Gender" value="M" class="form-check-input" id="male" />
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" asp-for="Gender" value="F" class="form-check-input" id="female" />
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input type="checkbox" asp-for="IAgreed" class="form-check-input" id="agree" />
+                            <label class="form-check-label" for="agree">I Agree</label>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-warning">Update</button>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
